@@ -44,7 +44,7 @@ The plugin currently supports five tasks:
 * [Post Annotation Event](https://www.dynatrace.com/support/help/shortlink/api-events#post-events)
 * [Post Info Event](https://www.dynatrace.com/support/help/shortlink/api-events#post-events)
 
-#### Post Deployment Event
+#### Post Deployment Event Task
 
 Posts a deployment event to the Dynatrace server.
 
@@ -64,7 +64,7 @@ Posts a deployment event to the Dynatrace server.
 
 * None
 
-#### Post Annotation Event
+#### Post Annotation Event Task
 
 Posts a annotation event to the Dynatrace server.
 
@@ -83,7 +83,7 @@ Posts a annotation event to the Dynatrace server.
 
 * None
 
-#### Post Info Event
+#### Post Info Event Task
 
 Posts a info event to the Dynatrace server.
 

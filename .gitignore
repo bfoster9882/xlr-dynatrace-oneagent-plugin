@@ -1,0 +1,6 @@
+.DS_Store
+.gradle
+.vscode
+.idea
+build
+supervisord.*

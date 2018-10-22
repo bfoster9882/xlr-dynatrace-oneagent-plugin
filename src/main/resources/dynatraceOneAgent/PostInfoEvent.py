@@ -14,12 +14,14 @@ from dynatraceOneAgent.Utils import Utils
 # Setup vars
 dynatrace_server = Utils.get_dynatrace_server(locals())
 release_id = getCurrentRelease().id
+rel_url = Utils.get_xlr_url(release_id, Utils.get_xlr_base_url(configurationApi.getGlobalVariables()))
 release_owner = "releaseVariables[release.owner]"
 api_key = Utils.get_dynatrace_api_token(locals())
 api_url = dynatrace_server['dynatraceEventApiUrl']
 server_url = Utils.get_dynatrace_server_url(locals())
 
 print 'The Release ID  is: %s' % release_id
+print 'The Release URL is: %s' % rel_url
 print 'The Dynatrace API URL is: %s ' % api_url
 
 # Setup http connection
@@ -31,7 +33,7 @@ content = {'eventType' : eventType,
            'description' : description,
            'source' : source,
            'title' : title,
-           'customProperties' : {'Owner' : release_owner, 'Release ID' : release_id} }
+           'customProperties' : {'Owner' : release_owner, 'Release ID' : release_id, 'Release URL' : rel_url} }
 
 print 'Json content is: '
 print json.dumps(content)

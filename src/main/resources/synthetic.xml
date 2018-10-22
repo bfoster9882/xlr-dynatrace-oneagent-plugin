@@ -21,7 +21,10 @@
         <property name="meType" category="input" label="Type of Dynatrace Entitiy" required="true" kind="enum" description="Hosts or Services, you want to pick up by matching" >
             <enum-values>
                 <value>HOST</value>
+                <value>PROCESS_GROUP</value>
+                <value>PROCESS_GROUP_INSTANCE</value>
                 <value>SERVICE</value>
+                <value>APPLICATION</value>
                 <value>CUSTOM_DEVICE</value>
             </enum-values>
         </property>

@@ -17,13 +17,11 @@ release_id = getCurrentRelease().id
 rel_url = Utils.get_xlr_url(release_id, Utils.get_xlr_base_url(configurationApi.getGlobalVariables()))
 release_owner = "releaseVariables[release.owner]"
 api_key = Utils.get_dynatrace_api_token(locals())
-api_url = dynatrace_server['dynatraceEventApiUrl']
+api_url = Utils.get_dynatrace_event_api_url(locals())
 server_url = Utils.get_dynatrace_server_url(locals())
 
 # Some debug
 print 'The Release ID  is: %s' % release_id
-print 'The Release URL is: %s' % rel_url
-print 'The Dynatrace API URL is: %s ' % api_url
 
 # Setup http connection
 connection = HttpRequest(dynatrace_server)

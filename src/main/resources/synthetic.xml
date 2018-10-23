@@ -4,7 +4,7 @@
     <type type="dynatraceOneAgent.Server" extends="configuration.HttpConnection" >
         <property name="scriptLocation" default="dynatraceOneAgent/TestDynatraceOneAgentConnection.py" hidden="true" />
         <property name="dynatraceToken" kind="string" password="true" description="User Access Token created on Dynattrace server" />
-        <property name="dynatraceEventApiUrl" kind="string" description='Event API URL for Dynattrace server. Managed: /e/{your-environment-id}/api/v1/events SaaS: /api/v1/events' />
+        <property name="dynatraceApiUrl" kind="string" default="/api/v1" hidden="true" description='Base API URL for Dynattrace server' />
         <property name="taskColor" hidden="true" default="#1282C8" />
         <property name="iconLocation" default="dynatraceOneAgent/dynatrace.png" hidden="true" />
         <property name="username" hidden="true" default="None"/>

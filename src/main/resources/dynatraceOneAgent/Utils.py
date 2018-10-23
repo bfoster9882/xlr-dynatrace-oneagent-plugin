@@ -28,13 +28,24 @@ class Utils(object):
     def get_dynatrace_api_token(variables):
         return variables['dynatraceServer']["dynatraceToken"]
 
-    # Method to get the token from the task config or the Dynatrace Server config
+    # Method to get the token from the Dynatrace Server config
     @staticmethod
     def get_dynatrace_server_url(variables):
         server_url = variables['dynatraceServer']['url']
         if server_url.endswith('/'):
             server_url = server_url[:len(server_url)-1]
+        print "Dynartace Server URL is: " + server_url
         return server_url
+
+    # Method to get the event api url from the Dynatrace Server config
+    @staticmethod
+    def get_dynatrace_event_api_url(variables):
+        event_endpoint = "events"
+        api_url = variables['dynatrace_server']['dynatraceApiUrl']
+        if api_url.endswith('/'):
+            api_url = api_url[:len(api_url)-1]
+        event_api_url = api_url + "/%s" % event_endpoint
+        return event_api_url
 
     # Method to get construct a URL for this release
     @staticmethod
@@ -76,8 +87,9 @@ class Utils(object):
         if create_var == True:
             ReleaseURL=Variable(var_name, rel_url )
             release_api.createVariable(release_id, ReleaseURL)
+            print 'Created release variable %s' % var_name
         else:
-            print '%s is already set, moving on...' % var_name
+            print 'release variable %s is already set, moving on...' % var_name
 
     @staticmethod
     def handle_response(response, event, url):

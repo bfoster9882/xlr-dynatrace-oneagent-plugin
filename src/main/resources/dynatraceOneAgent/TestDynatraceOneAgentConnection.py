@@ -10,15 +10,18 @@
 import sys
 
 params = { 'url': configuration.url }
-api_url = configuration.dynatraceEventApiUrl
+api_url = configuration.dynatraceApiUrl
 api_key = configuration.dynatraceToken
+event_endpoint = "events"
+event_api_url = api_url + "/%s" % event_endpoint
 connection = HttpRequest(params)
 
 # do an http get request to the server
+logger.info('Testing the Dynatrace Server configuration...')
 logger.info('Base URL is %s' % configuration.url)
-logger.info('API URL is %s' % api_url)
+logger.info('API URL is %s' % event_api_url)
 logger.info('API Key is %s' % api_key)
-response = connection.get(api_url, headers={"Content-Type": "application/json", "Accept": "application/json", "Authorization": "Api-Token %s" % api_key})
+response = connection.get(event_api_url, headers={"Content-Type": "application/json", "Accept": "application/json", "Authorization": "Api-Token %s" % api_key})
 
 # check response status code, if is different than 200 exit with error code
 logger.info('Http Response code is %s' % response.status)

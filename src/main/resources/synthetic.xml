@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <type type="dynatraceOneAgent.Server" extends="configuration.HttpConnection" >
+        <property name="scriptLocation" default="dynatraceOneAgent/TestDynatraceOneAgentConnection.py" hidden="true" />
+        <property name="dynatraceToken" kind="string" password="true" description="User Access Token created on Dynattrace server" />
+        <property name="dynatraceApiUrl" kind="string" default="/api/v1" hidden="true" description='Base API URL for Dynattrace server' />
+        <property name="taskColor" hidden="true" default="#1282C8" />
+        <property name="iconLocation" default="dynatraceOneAgent/dynatrace.png" hidden="true" />
+        <property name="username" hidden="true" default="None"/>
+        <property name="password" hidden="true" password="true" default="None" />
+        <property name="domain" hidden="true" default="None" />
+    </type>
+
+    <type type="dynatraceOneAgent.EventTask" extends="xlrelease.PythonScript" virtual="true" >
+        <property name="dynatraceServer" category="input" referenced-type="dynatraceOneAgent.Server" kind="ci" />
+        <property name="releaseUrlVariableName" category="input" kind="string" default="ReleaseURL" hidden="true" description="Use to set a release variable with the releases URL" />
+        <property name="source" category="input" required="true" hidden="true" default="XLRelease" />
+        <property name="taskColor" hidden="true" default="#1282C8" />
+        <property name="iconLocation" default="dynatraceOneAgent/dynatrace.png" hidden="true" />
+        <property name="meType" category="input" label="Type of Dynatrace Entitiy" required="true" kind="enum" description="Hosts or Services, you want to pick up by matching" >
+            <enum-values>
+                <value>HOST</value>
+                <value>PROCESS_GROUP</value>
+                <value>PROCESS_GROUP_INSTANCE</value>
+                <value>SERVICE</value>
+                <value>APPLICATION</value>
+                <value>CUSTOM_DEVICE</value>
+            </enum-values>
+        </property>
+        <property name="customTags" category="input" label="Dynatrace Tags" description="The tag you want to use for matching. At least one tag is required" />
+    </type>
+
+    <type type="dynatraceOneAgent.PostDeployEvent" extends="dynatraceOneAgent.EventTask" >
+        <property name="eventType" default="CUSTOM_DEPLOYMENT" category="input" hidden="true" />
+        <property name="deploymentName" category="input" required="true" />
+        <property name="deploymentVersion" category="input" required="true" />
+        <property name="deploymentProject" category="input" required="false" />
+        <property name="remediationUrl" label="Remediation URL" category="input" required="false" />
+    </type>
+
+    <type type="dynatraceOneAgent.PostAnnotationEvent" extends="dynatraceOneAgent.EventTask" >
+        <property name="eventType" default="CUSTOM_ANNOTATION" category="input" hidden="true" />
+        <property name="description" category="input" required="false" />
+        <property name="annotationType" category="input" required="true" />
+        <property name="annotationDescription" category="input" required="true" />
+    </type>
+
+    <type type="dynatraceOneAgent.PostInfoEvent" extends="dynatraceOneAgent.EventTask" >
+        <property name="eventType" default="CUSTOM_INFO" category="input" hidden="true" />
+        <property name="description" category="input" required="true" />
+        <property name="title" category="input" required="false" />
+    </type>
+
+</synthetic>

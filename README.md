@@ -18,7 +18,10 @@ In addition to being a monitoring tool, Dynatrace can be used to collect data du
 1. Restart the XL Release server
 
 ## Plugin Configuration
-The plugin requires the following configuration:
+1. Create a Global variable to hold  the XL Release Server URL (Pre 8.5).
+1. Add a Dynatrace OneAgent Server configuration in the Shared Configuration view.
+
+The plugin requires the following configuration (steps from above):
 * Under **Settings -> Global vairables** Create a new global variable called **XLRServerURL** to contain the server URL that should be used to access XL Release. For example.  https://xlrelease.acme.com:5516
 ![screenshot of 'Create Global Variable' called XLRServerURL ](documentation/xlr-global-var.png)
 * Under **Settings -> Shared Configuration** menu, add a Dynatrace server

@@ -1,4 +1,5 @@
-#XL Release Dynatrace OneAgent Plugin
+##XL Release Dynatrace OneAgent Plugin
+Note:  this plugin is for Dynatrace OneAgent If you require [Dynatrace AppMon](https://github.com/xebialabs-community/xlr-dynatrace-plugin) please use this link.
 
 ## Preface
 This document descripts the functionality provide by the `xlr-dynatrace-oneagent-plugin`, as well as potential future functionality.

@@ -27,7 +27,7 @@ connection = HttpRequest(dynatrace_server)
 
 # Body of the http call to the Dynatrace server
 content = {'eventType' : eventType,
-           'attachRules' : {'tagRule' : {'meTypes' : meType, 'tags' : [ customTags ] } },
+           'attachRules' : {'tagRule' : {'meTypes' : meType, 'tags' : Utils.tags_data(customTags) } },
            'description' : description,
            'source' : source,
            'title' : title,

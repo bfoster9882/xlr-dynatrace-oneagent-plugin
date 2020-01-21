@@ -28,7 +28,7 @@
                 <value>CUSTOM_DEVICE</value>
             </enum-values>
         </property>
-        <property name="customTags" category="input" label="Dynatrace Tags" description="The tag you want to use for matching. At least one tag is required" />
+        <property name="customTags" category="input" label="Dynatrace Tags" description="The tag you want to use for matching. At least one tag is required. Variations : eg. mytag,  eg. taga,tagb,tagc, eg. context=aws,Name=DWDWDssd92,inspector=true" />
     </type>
 
     <type type="dynatraceOneAgent.PostDeployEvent" extends="dynatraceOneAgent.EventTask" >

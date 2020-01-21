@@ -8,7 +8,7 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import sys, json
+import sys, json, re
 from com.xebialabs.xlrelease.api.v1.forms import  Variable
 
 
@@ -99,3 +99,36 @@ class Utils(object):
             print "Failed to register a %s event with Dynatrace server at %s" % (event, url)
             response.errorDump()
             sys.exit(1)
+
+    @staticmethod
+    def tags_data(tagstring):
+        datalist = []
+        datamap = dict()
+        if tagstring.find("=") > 0:
+            detail_tag_regex = "([^=^,.]+)=([^=^,.]+)"
+            find_context_regex = "context=([a-zA-Z0-9]+)"
+            
+            expr = re.search(find_context_regex, tagstring)
+            if expr == None:
+                context = "CONTEXTLESS"
+            else:
+                context = expr.group(1)
+
+            re_iter = re.finditer(detail_tag_regex, tagstring)
+            while True:
+                try:
+                    item = re_iter.next()
+                    if item.groups()[0] != "context":
+                        datamap = dict()
+                        datamap['context'] = context
+                        datamap['key'] = item.groups()[0]
+                        datamap['value'] = item.groups()[1]
+                        datalist.append(datamap)
+                except StopIteration:
+                    break
+            return datalist
+        else :
+            return tagstring.split(",")
+
+
+
